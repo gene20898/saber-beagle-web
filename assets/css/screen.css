@@ -100,22 +100,29 @@ production stylesheet in assets/built/screen.css
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: auto;
     height: 100%;
-    object-fit: cover;
+    width: 50%;
+    object-fit: contain;
+}
+
+.site-header-text   {
+    text-align: start;
+    width: 60%;
+    padding-left: 10vw;
+    z-index:12;
 }
 
 .site-header-content {
     position: relative;
     z-index: 100;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: start;
     align-items: center;
     padding: 6vw 3vw;
     min-height: 200px;
-    max-height: 340px;
+    height: 100vh;
     text-align: center;
 }
 
@@ -131,17 +138,68 @@ production stylesheet in assets/built/screen.css
 
 .site-header-content p {
     z-index: 10;
-    max-width: 600px;
     margin: 0 auto;
     line-height: 1.2em;
     opacity: 0.8;
 }
 
+.site-header-text h1{
+    font-size: 5vmin;
+    font-weight: 500;
+    color:#0e1111;
+}
+.site-header-text p{
+    line-height: max(10vmin, 6vmax);
+}
+.saber-name{
+    font-weight: 700;
+    font-size: min(6vmax,2em);
+    color:firebrick
+}
+.saber-name span{
+    color:#000;
+}
+
 @media (max-width: 600px) {
-    .site-header-content p {
-        max-width: 80vmin;
-        font-size: 1.8rem;
+    .site-header-content{
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        max-height: 100vh;
     }
+    .site-header-text {
+        position: relative;
+        display: block;
+        width: 100%;
+        top: 15%;
+        padding: 0;
+        text-align: center;
+    }
+    .site-header-text h1{
+        font-size: calc(0.5em + 5vw);
+        font-weight: 500;
+        color:#0e1111
+    }
+    .site-header-text p{
+        line-height: calc(0.5em + 10vw);
+    }
+    .saber-name{
+        font-weight: 700;
+        font-size: calc(6vw + 0.5em);
+        color:firebrick
+    }
+    .saber-name span{
+        color:#000;
+    }
+
+    .site-header-cover {
+        position: relative;
+        top: auto;
+        bottom: -10%;
+        height: auto;
+        max-height:70%;
+        width:100%;
+    }   
 }
 
 /* 4.1 Home header
@@ -154,12 +212,13 @@ production stylesheet in assets/built/screen.css
 }
 
 .site-header-content {
-    padding: 18vmin 4vmin;
+    padding: 0px;
     font-size: 2.5rem;
     font-weight: 400;
-    color: #fff;
-    background: var(--ghost-accent-color);
+    color: rgb(0, 0, 0);
+    background: #edc085;
 }
+
 
 
 
@@ -170,7 +229,7 @@ production stylesheet in assets/built/screen.css
     padding: 1vmin 4vmin;
     font-size: 1.6rem;
     line-height: 1.3em;
-    color: #fff;
+    color: #ffffff;
     background: var(--ghost-accent-color);
 }
 
@@ -298,6 +357,11 @@ production stylesheet in assets/built/screen.css
     width: 20px;
 }
 
+.gh-social-instragram svg {
+    height: 20px;
+    width: 20px;
+}
+
 a.gh-head-button {
     display: block;
     padding: 8px 15px;
@@ -315,8 +379,9 @@ a.gh-head-button {
 /* ---------------------------------------------------------- */
 
 .gh-burger {
-    position: relative;
+    position: absolute;
     display: none;
+    left: 0;
     cursor: pointer;
 }
 
@@ -325,7 +390,7 @@ a.gh-head-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 33px;
+    width: 25px;
     height: 33px;
 }
 
@@ -343,7 +408,7 @@ a.gh-head-button {
     margin: auto;
     content: '';
     width: 100%;
-    height: 1px;
+    height: 3px;
     background: currentcolor;
     transition: transform 300ms cubic-bezier(.2,.6,.3,1), width 300ms cubic-bezier(.2,.6,.3,1);
     will-change: transform, width;
@@ -359,7 +424,7 @@ a.gh-head-button {
     margin: auto;
     content: '';
     width: 100%;
-    height: 1px;
+    height: 3px;
     background: currentcolor;
     transition: transform 250ms cubic-bezier(.2,.7,.3,1), width 250ms cubic-bezier(.2,.7,.3,1);
     will-change: transform, width;
@@ -407,6 +472,7 @@ body:not(.gh-head-open) .gh-burger:hover .gh-burger-inner::after {
     #gh-head {
         transition: all 0.4s ease-out;
         overflow: hidden;
+        position: fixed;
     }
     #gh-head .gh-head-inner {
         height: 100%;
@@ -419,11 +485,8 @@ body:not(.gh-head-open) .gh-burger:hover .gh-burger-inner::after {
         max-width: none;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         user-select: none;
-    }
-    .home-template #gh-head .gh-head-brand {
-        justify-content: flex-end;
     }
     #gh-head .gh-head-menu {
         align-self: center;
@@ -498,20 +561,12 @@ body:not(.gh-head-open) .gh-burger:hover .gh-burger-inner::after {
 }
 
 .home-template .gh-head.has-cover {
-    background: transparent;
+    background: #AC6344;
 }
 
 .home-template.gh-head-open .gh-head {
     background: var(--ghost-accent-color);
 }
-
-.home-template .gh-head-logo {
-    display: none;
-}
-.home-template .gh-head-menu {
-    margin-left: -2.5vmin;
-}
-
 
 /* 6. Post Feed
 /* ---------------------------------------------------------- */
@@ -544,13 +599,17 @@ body:not(.gh-head-open) .gh-burger:hover .gh-burger-inner::after {
     min-height: 220px;
     background-size: cover;
     word-break: break-word;
+    padding: 0px;
+    border-radius: 10px;
+    box-shadow: 1px 3px 5px rgb(0 0 0 / 10%);
+    border-bottom: 1px solid #fafafa
 }
 
 .post-card-image-link {
     position: relative;
     display: block;
     overflow: hidden;
-    border-radius: 3px;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .post-card-image {
@@ -606,6 +665,7 @@ body:not(.gh-head-open) .gh-burger:hover .gh-burger-inner::after {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    padding: 0px 20px 20px 20px;
 }
 
 .post-card-excerpt {
@@ -1670,9 +1730,9 @@ Ghost editor. */
 .site-footer {
     position: relative;
     margin: 40px 0 0 0;
-    padding: 40px 4vmin 140px;
+    padding: 40px 4vmin 20px;
     color: #fff;
-    background: color-mod(var(--color-darkgrey) l(-5%));
+    background: #6b4330;
 }
 
 .site-footer .inner {
